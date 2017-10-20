@@ -1,0 +1,47 @@
+<!--
+  Generated template for the PerfilPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Perfil</ion-title>
+
+<ion-buttons right>
+      <button ion-button clear (click)="salvarDados()">
+        Salvar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<div class="wrapper">
+		<img src="assets/icon/images.png"  alt="" />
+	</div>
+	<div class="center">
+ 	 <button ion-button clear>Editar Foto</button>
+	</div>
+
+	<ion-list style="margin-top: 50px">
+		  <ion-item>
+   			 <ion-label color="primary" stacked>Nome</ion-label>
+   			 <ion-input type="text" placeholder="Nome"></ion-input>
+ 		 </ion-item>
+ 		 <ion-item>
+   			 <ion-label color="primary" stacked>Data de Nascimento</ion-label>
+   			  <ion-datetime displayFormat="MM/DD/YYYY" placeholder="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+ 		 </ion-item>
+ 		 <ion-item>
+   			 <ion-label color="primary" stacked>Email</ion-label>
+   			 <ion-input type="email" placeholder="email"></ion-input>
+ 		 </ion-item>
+	</ion-list>
+
+</ion-content>
