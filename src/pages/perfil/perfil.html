@@ -23,7 +23,7 @@
 <ion-content padding>
 
 	<div class="wrapper">
-		<img src="assets/icon/images.png"  alt="" />
+		<img [src]="imageUrl"  alt="" />
 	</div>
 	<div class="center">
  	 <button ion-button clear>Editar Foto</button>
@@ -32,15 +32,15 @@
 	<ion-list style="margin-top: 50px">
 		  <ion-item>
    			 <ion-label color="primary" stacked>Nome</ion-label>
-   			 <ion-input type="text" placeholder="Nome"></ion-input>
+   			 <ion-input [(ngModel)]="name" type="text" placeholder="Nome"></ion-input>
  		 </ion-item>
  		 <ion-item>
    			 <ion-label color="primary" stacked>Data de Nascimento</ion-label>
-   			  <ion-datetime displayFormat="MM/DD/YYYY" placeholder="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+   			  <ion-datetime displayFormat="MM/DD/YYYY" placeholder="MM/DD/YYYY" [(ngModel)]="birthdate"></ion-datetime>
  		 </ion-item>
  		 <ion-item>
    			 <ion-label color="primary" stacked>Email</ion-label>
-   			 <ion-input type="email" placeholder="email"></ion-input>
+   			 <ion-input [(ngModel)]="email" type="email" placeholder="email"></ion-input>
  		 </ion-item>
 	</ion-list>
 
