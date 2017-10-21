@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class PerfilService {
 
-  usuario =  { imageUrl: '',
+  usuario =  { imageUrl: 'assets/icon/images.png',
   name: '',
   birthdate: '',
   email: '' };
@@ -19,24 +19,20 @@ export class PerfilService {
 
   }
 
-  storageGetUser(scope, callback) {
+  getUser(scope) {
     this.storage.get('user').then((val) => {
       this.usuario = val;
       if (this.usuario == null) {
-        this.usuario = { imageUrl: '',
+        this.usuario = { imageUrl: 'assets/icon/images.png',
         name: '',
         birthdate: '',
         email: '' };
       }
+      let callback = scope.getUser
       if (typeof callback === "function") {
-         // Execute the callback function and pass the parameters to it​
            callback(this.usuario, scope);
        }
     });
-  }
-
-  getUser() {
-      return this.usuario
   }
 
   addUser(usuario) {

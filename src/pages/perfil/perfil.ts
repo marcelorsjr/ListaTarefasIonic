@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { PerfilService } from '../../providers/perfil-service';
+import { LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the PerfilPage page.
@@ -21,29 +22,33 @@ import { PerfilService } from '../../providers/perfil-service';
  	name: String;
  	birthdate: String;
  	email: String;
+ 	loading;
 
- 	constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public perfilService: PerfilService) {
+ 	constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public perfilService: PerfilService, public loadingCtrl: LoadingController) {
 
  	}
 
  	ionViewDidLoad() {
  		console.log('ionViewDidLoad PerfilPage');
- 		 		
+
 
  	}
 
  	ionViewWillEnter() {
- 		this.perfilService.storageGetUser(this, this.getUser);
+ 		this.loading = this.loadingCtrl.create({
+ 			content: 'Carregando dados...'
+ 		});
+
+ 		this.loading.present();
+ 		this.perfilService.getUser(this);
 
  	}
 
  	getUser(usuario, self) {
- 		 		 		console.log(1)
- 		 		console.log(usuario.imageUrl)
- 		 		console.log(2)
- 		//this.imageUrl = usuario.imageUrl;
-
- 		if (self.imageUrl == "")
+ 		self.loading.dismiss();
+ 		self.imageUrl = usuario.imageUrl
+ 		console.log(self.imageUrl)
+ 		if (self.imageUrl == "" || self.imageUrl == null)
  			self.imageUrl = "assets/icon/images.png"
  		self.name = usuario.name;
  		self.birthdate = usuario.birthdate;
@@ -91,22 +96,22 @@ import { PerfilService } from '../../providers/perfil-service';
 
  	salvarDados() {
  		if (this.validateFields() == true) {
- 			  let usuario =  { imageUrl: this.imageUrl,
-               name: this.name,
-               birthdate: this.birthdate,
-                email: this.email};
+ 			let usuario =  { imageUrl: this.imageUrl,
+ 				name: this.name,
+ 				birthdate: this.birthdate,
+ 				email: this.email};
 
-                this.perfilService.addUser(usuario);
+ 				this.perfilService.addUser(usuario);
 
-                 			const alert = this.alertCtrl.create({
- 				title: 'Sucesso',
- 				subTitle: 'Dados gravados com sucesso!',
- 				buttons: ['OK']
- 			});
- 			alert.present();
+ 				const alert = this.alertCtrl.create({
+ 					title: 'Sucesso',
+ 					subTitle: 'Dados gravados com sucesso!',
+ 					buttons: ['OK']
+ 				});
+ 				alert.present();
 
 
+ 			}
  		}
- 	}
 
- }
+ 	}
